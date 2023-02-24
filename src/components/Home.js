@@ -1,7 +1,7 @@
 import { collection, deleteDoc, getDocs,doc } from 'firebase/firestore';
 import React, {useEffect, useState} from 'react';
 import "./Home.css"
-import { db } from "../firebase";
+import { auth, db } from "../firebase";
 
 export const Home = () => {
   const [postList, setPostList] = useState([]);
@@ -34,7 +34,9 @@ export const Home = () => {
             </div>
             <div className="nameAndDeleteButton">
               <h3>{post.author.username}</h3>
-              <button onClick={() => handleDelete(post.id)}>削除</button>
+              {post.author.id === auth.currentUser.uid && (
+                <button onClick={() => handleDelete(post.id)}>削除</button>
+              )}
             </div>
           </div>
         )

@@ -33,8 +33,8 @@ export const Home = () => {
               {post.postsText}
             </div>
             <div className="nameAndDeleteButton">
-              <h3>{post.author.username}</h3>
-              {post.author.id === auth.currentUser.uid && (
+              <h3>@{post.author.username}</h3>
+              {auth.currentUser !== null && post.author.id === auth.currentUser.uid && (
                 <button onClick={() => handleDelete(post.id)}>削除</button>
               )}
             </div>

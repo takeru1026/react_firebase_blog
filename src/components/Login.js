@@ -1,11 +1,17 @@
 import React from 'react'
-import { signInWithPop } from "firebase/auth";
+import { signInWithPopup } from "firebase/auth";
+import {auth, provider } from "../firebase";
+import { useNavigate } from "react-router-dom";
 
-export const Login = () => {
+export const Login = ({ setIsAuth }) => {
+  // 
+  const navigate = useNavigate();
   const loginWithGoogle = () => {
     // Google Login
-    signInWithPop(auth, provider).then((reslut) => {
-      
+    signInWithPopup(auth, provider).then((result) => {
+      localStorage.setItem("isAuth", true);
+      setIsAuth(true);
+      navigate("/");
     })
   }
   return (
